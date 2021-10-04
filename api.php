@@ -1,5 +1,6 @@
 
 <?php
+include_once("includes/config.php");
 // Detta är taget från teori och läsanvisningar. 
 
 /*Headers med inställningar för din REST webbtjänst*/
@@ -25,22 +26,50 @@ if(isset($_GET['id'])) {
 }
 
 
+$course = new Course();
+
 switch($method) {
     case 'GET':
         //Skickar en "HTTP response status code"
         http_response_code(200); //Ok - The request has succeeded
 
+        $response = $course->getCourses();
+
+        if(count($response) == 0) {
         //Lagrar ett meddelande som sedan skickas tillbaka till anroparen
         $response = array("message" => "There is nothing to get yet");
+        }
+
 
         break;
     case 'POST':
         //Läser in JSON-data skickad med anropet och omvandlar till ett objekt.
         $data = json_decode(file_get_contents("php://input"));
         
-        http_response_code(201); //Created
+        if($data->course_code == "" 
+        || $data->course_name == "" 
+        || $data->course_progression =="" 
+        || $data->course_syllabus == ""
+        || $data->course_grade == "") {
+            $response = array("message"  => "Please enter the form." );
+            http_response_code(400); //user error. Fel av användaren. 
+        } else {
+            if($course->setCourse(
+                $data->course_code, 
+                $data->course_name, 
+                $data->course_progression, 
+                $data->course_syllabus, 
+                $data->course_grade)) {
+                    // meddelande att det lyckats
+                    $response = array("message" => "Created");
+        
+                    http_response_code(201); //Created
+                } else {
+                    $response = array("message" => "Something went wrong");
+                    http_response_code(500); // server error. Felmeddelande om att det är fel backend.
+                }
+        }
 
-        $response = array("message" => "Created");
         break;
     case 'PUT':
         //Om inget id är med skickat, skicka felmeddelande

@@ -10,9 +10,9 @@ $c = new Course();
 // var_dump($c);
 
 // test för att lägga till
-var_dump($c->setCourse("DT084G", 
-"22", "",
- "kursplan", "b" ));
+var_dump($c->setCourse("TEST", 
+"TEST", "",
+ "TEST", "TEST" ));
 
 
 // uppdatera

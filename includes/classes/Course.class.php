@@ -23,7 +23,7 @@ class Course {
     public function setCourse( string $course_code, string $course_name, string $course_progression, string $course_syllabus, string $course_grade) : bool {
         $minValue = min(strlen($course_code), strlen($course_name),strlen($course_progression),strlen($course_syllabus), strlen($course_grade));
         if($minValue >= 1) {       
-             $this->course_code = $course_code;
+            $this->course_code = $course_code;
             $this->course_name = $course_name;
             $this->course_progression = $course_progression;
             $this->course_syllabus = $course_syllabus;
