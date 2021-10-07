@@ -5,6 +5,14 @@ include_once("includes/config.php");
 
 /*Headers med inställningar för din REST webbtjänst*/
 
+// ett försök att få flera domäner.
+// $http_origin = $_SERVER['HTTP_ORIGIN'];
+// if($http_origin == "https://webb3mom5.netlify.app" || $http_origin =="studenter.miun.se") {
+
+// //Gör att webbtjänsten går att komma åt från alla domäner (asterisk * betyder alla) 
+// header('Access-Control-Allow-Origin: $http_origin');
+// } 
+
 //Gör att webbtjänsten går att komma åt från alla domäner (asterisk * betyder alla) 
 header('Access-Control-Allow-Origin: studenter.miun.se');
 
