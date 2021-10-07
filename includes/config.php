@@ -1,4 +1,5 @@
 <?php 
+// ändra till false när man publicerar
 $devMode = true;
 if($devMode) {
     // Rapportera fel
@@ -20,6 +21,6 @@ if($devMode) {
 } else {
     define("DBHOST", "studentmysql.miun.se");
     define("DBUSER", "joka2005");
-    define("DBPASS", "3hUPF8fFAC");
+    define("DBPASS", "password");
     define("DBDATABASE", "joka2005");
 }

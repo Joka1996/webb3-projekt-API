@@ -10,13 +10,13 @@ $c = new Course();
 // var_dump($c);
 
 // test för att lägga till
-var_dump($c->setCourse("TEST", 
-"TEST", "",
- "TEST", "TEST" ));
+// var_dump($c->setCourse("TEST", 
+// "TEST", "",
+//  "TEST", "TEST" ));
 
 
 // uppdatera
-// $c->updateCourse(6,"","NYKURS","NYKURS","NYKURS","NYKURS");
+$c->updateCourse(14,"NY1","NY1","NY1","NY1","NY1");
 
 // Test för att se alla en eller en specefik. 
 echo"<pre>";
