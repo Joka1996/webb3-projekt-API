@@ -6,7 +6,7 @@ include_once("includes/config.php");
 /*Headers med inställningar för din REST webbtjänst*/
 
 //Gör att webbtjänsten går att komma åt från alla domäner (asterisk * betyder alla) 
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: studenter.miun.se');
 
 //Talar om att webbtjänsten skickar data i JSON-format
 header('Content-Type: application/json');
@@ -81,20 +81,14 @@ switch($method) {
         } else {
             $data = json_decode(file_get_contents("php://input"));
 
-            $course->id = $data->id;
-            $course->course_code= $data->course_code;
-            $course->course_name= $data->course_name;
-            $course->course_progression= $data->course_progression;
-            $course->course_syllabus= $data->course_syllabus;
-            $course->course_grade= $data->course_grade;
-
             if($course->updateCourse(
-            $data->$id,
-            $data->$course_code,
-            $data->$course_name,
-            $data->$course_progression,
-            $data->$course_syllabus,
-            $data->$course_grade)) {
+            $data->id,
+            $data->course_code,
+            $data->course_name,
+            $data->course_progression,
+            $data->course_syllabus,
+            $data->course_grade
+            )) {
                 // ok
                 http_response_code(200);
                 $response = array("message" => "Course with id=$id is updated");

@@ -66,7 +66,7 @@ class Course {
 
     // uppdatera kurs, måste ändra alla värden.
     public function updateCourse(int $id, string $course_code, string $course_name, string $course_progression, string $course_syllabus, string $course_grade) : bool {
-    
+        
         $this->course_code = $course_code;
         $this->course_name = $course_name;
         $this->course_progression = $course_progression;
@@ -74,7 +74,7 @@ class Course {
         $this->course_grade = $course_grade;
         $id = intval($id);
   
-
+       
         $stmt = $this->db->prepare("UPDATE course_list SET course_code=?, course_name=?, course_progression=?, course_syllabus=?, course_grade=? WHERE id=$id;");
         $stmt->bind_param("sssss", $this->course_code, $this->course_name, $this->course_progression, $this->course_syllabus, $this->course_grade);
 
@@ -84,8 +84,8 @@ class Course {
             return false;
         }
         $stmt->close();
-      
-  
+
+
     }
     
     // ta bort en kurs
@@ -97,4 +97,54 @@ class Course {
     } 
 
 
+    // setters 
+    public function setCode(string $course_code) : bool {
+        $course_code = strip_tags($course_code, "<br><i><em><b><strong><li><ul><ol>");
+        if (strlen($course_code) > 3) {
+            $this->course_code=$this->db->real_escape_string($course_code);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setName(string $course_name) : bool {
+        $course_name = strip_tags($course_name, "<br><i><em><b><strong><li><ul><ol>");
+        if (strlen($course_name) > 3) {
+            $this->course_name=$this->db->real_escape_string($course_name);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setProg(string $course_progression) : bool {
+        $course_progression = strip_tags($course_progression, "<br><i><em><b><strong><li><ul><ol>");
+        if (strlen($course_progression) > 3) {
+            $this->course_progression=$this->db->real_escape_string($course_progression);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setSyllabus(string $course_syllabus) : bool {
+        $course_syllabus = strip_tags($course_syllabus, "<br><i><em><b><strong><li><ul><ol>");
+        if (strlen($course_syllabus) > 3) {
+            $this->course_syllabus=$this->db->real_escape_string($course_syllabus);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setGrade(string $course_grade) : bool {
+        $course_grade = strip_tags($course_grade, "<br><i><em><b><strong><li><ul><ol>");
+        if (strlen($course_grade) > 3) {
+            $this->course_grade=$this->db->real_escape_string($course_grade);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

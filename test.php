@@ -16,7 +16,7 @@ $c = new Course();
 
 
 // uppdatera
-$c->updateCourse(14,"NY1","NY1","NY1","NY1","NY1");
+$c->updateCourse(125,"222","N222","222","NY22","N2221");
 
 // Test för att se alla en eller en specefik. 
 echo"<pre>";
