@@ -81,23 +81,33 @@ switch($method) {
         } else {
             $data = json_decode(file_get_contents("php://input"));
 
-            if($course->updateCourse(
-            $data->id,
-            $data->course_code,
-            $data->course_name,
-            $data->course_progression,
-            $data->course_syllabus,
-            $data->course_grade
-            )) {
-                // ok
-                http_response_code(200);
-                $response = array("message" => "Course with id=$id is updated");
+            if(
+            $data->id ==""
+            || $data->course_code == "" 
+            || $data->course_name == "" 
+            || $data->course_progression =="" 
+            || $data->course_syllabus == ""
+            || $data->course_grade == "") {
+                $response = array("message"  => "Please enter the form." );
+                http_response_code(400); //user error. Fel av användaren. 
             } else {
-                // server error
-                http_response_code(503); 
-                $response=array("message" => "Course not updated");
+                if($course->updateCourse(
+                    $data->id,
+                    $data->course_code,
+                    $data->course_name,
+                    $data->course_progression,
+                    $data->course_syllabus,
+                    $data->course_grade
+                    )) {
+                        // ok
+                        http_response_code(200);
+                        $response = array("message" => "Course with id=$id is updated");
+                    } else {
+                        // server error
+                        http_response_code(503); 
+                        $response=array("message" => "Course not updated");
+                    }
             }
-            
       
             }
         break;
