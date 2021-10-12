@@ -15,9 +15,9 @@ include "classes/" . $class_name . ".class.php";
 if($devMode) {
     // anslutsinställnigar 
     define("DBHOST", "localhost");
-    define("DBUSER", "webb3mom5");
+    define("DBUSER", "webb3project");
     define("DBPASS", "password");
-    define("DBDATABASE", "webb3mom5");
+    define("DBDATABASE", "webb3project");
 } else {
     define("DBHOST", "studentmysql.miun.se");
     define("DBUSER", "joka2005");

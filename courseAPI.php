@@ -55,18 +55,18 @@ switch($method) {
         //Läser in JSON-data skickad med anropet och omvandlar till ett objekt.
         $data = json_decode(file_get_contents("php://input"));
         
-        if($data->course_code == "" 
+        if($data->course_school == "" 
         || $data->course_name == "" 
-        || $data->course_progression =="" 
+        || $data->course_time =="" 
         || $data->course_syllabus == ""
         || $data->course_grade == "") {
             $response = array("message"  => "Please enter the form." );
             http_response_code(400); //user error. Fel av användaren. 
         } else {
             if($course->setCourse(
-                $data->course_code, 
+                $data->course_school, 
                 $data->course_name, 
-                $data->course_progression, 
+                $data->course_time, 
                 $data->course_syllabus, 
                 $data->course_grade)) {
                     // meddelande att det lyckats
@@ -91,9 +91,9 @@ switch($method) {
 
             if(
             $data->id ==""
-            || $data->course_code == "" 
+            || $data->course_school == "" 
             || $data->course_name == "" 
-            || $data->course_progression =="" 
+            || $data->course_time =="" 
             || $data->course_syllabus == ""
             || $data->course_grade == "") {
                 $response = array("message"  => "Please enter the form." );
@@ -101,9 +101,9 @@ switch($method) {
             } else {
                 if($course->updateCourse(
                     $data->id,
-                    $data->course_code,
+                    $data->course_school,
                     $data->course_name,
-                    $data->course_progression,
+                    $data->course_time,
                     $data->course_syllabus,
                     $data->course_grade
                     )) {
