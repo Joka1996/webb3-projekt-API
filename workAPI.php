@@ -6,7 +6,7 @@ include_once("includes/config.php");
 /*Headers med inställningar för din REST webbtjänst*/
 
 //Gör att webbtjänsten går att komma åt från alla domäner (asterisk * betyder alla) 
-header('Access-Control-Allow-Origin: studenter.miun.se');
+header('Access-Control-Allow-Origin: *');
 
 //Talar om att webbtjänsten skickar data i JSON-format
 header('Content-Type: application/json');
@@ -33,13 +33,12 @@ switch($method) {
         //Skickar en "HTTP response status code"
         http_response_code(200); //Ok - The request has succeeded
 
-        $response = $work->getwork();
+        $response = $work->getWork();
        
         // kontroll
         if(count($response) == 0) {
         //Lagrar ett meddelande som sedan skickas tillbaka till anroparen
         $response = array("message" => "There is nothing to get yet");
-        echo json_encode($response);
         }
 
 
@@ -94,12 +93,12 @@ switch($method) {
                         // ok
                         http_response_code(200);
                         $response = array("message" => "Work with id=$id is updated");
-                        echo json_encode($response);
+                
                     } else {
                         // server error
                         http_response_code(503); 
                         $response=array("message" => "Work not updated");
-                        echo json_encode($response);
+                        
                     }
             }
       
@@ -115,12 +114,12 @@ switch($method) {
             if($work->deleteWork($id)) {
                 http_response_code(200);
                 $response = array("message" => "Work with id=$id is deleted");
-                echo json_encode($response);
+              
             } else {
                 // server error
                 http_response_code(503); 
                 $response =array("message" =>"Work not deleted.");
-                echo json_encode($response);
+                
             }
           
         }

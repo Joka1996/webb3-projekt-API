@@ -7,8 +7,8 @@ if ($db -> connect_errno > 0){
 }
 
 // skapa tabeller med sql
-$sql = "DROP TABLE IF EXISTS course_list;";
-$sql = "CREATE TABLE course_list(id INT(11) PRIMARY KEY AUTO_INCREMENT,
+$sql = "DROP TABLE IF EXISTS course_list2;";
+$sql = "CREATE TABLE course_list2(id INT(11) PRIMARY KEY AUTO_INCREMENT,
 course_school VARCHAR(200) NOT NULL, 
 course_time VARCHAR(64) NOT NULL,
 course_name VARCHAR(64) NOT NULL, 

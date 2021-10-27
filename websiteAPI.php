@@ -6,7 +6,7 @@ include_once("includes/config.php");
 /*Headers med inställningar för din REST webbtjänst*/
 
 //Gör att webbtjänsten går att komma åt från alla domäner (asterisk * betyder alla) 
-header('Access-Control-Allow-Origin: studenter.miun.se');
+header('Access-Control-Allow-Origin: *');
 
 //Talar om att webbtjänsten skickar data i JSON-format
 header('Content-Type: application/json');
@@ -39,7 +39,7 @@ switch($method) {
         if(count($response) == 0) {
         //Lagrar ett meddelande som sedan skickas tillbaka till anroparen
         $response = array("message" => "There is nothing to get yet");
-        echo json_encode($response);
+        
         }
 
 
@@ -64,11 +64,11 @@ switch($method) {
                 $data->website_about)) {
                     // meddelande att det lyckats
                     $response = array("message" => "Created");
-                    echo json_encode($response);
+                    
                     http_response_code(201); //Created
                 } else {
                     $response = array("message" => "Something went wrong");
-                    echo json_encode($response);
+                    
                     http_response_code(500); // server error. Felmeddelande om att det är fel backend.
                 }
         }
@@ -79,7 +79,7 @@ switch($method) {
         if(!isset($id)) {
             http_response_code(400); //Bad Request - The server could not understand the request due to invalid syntax.
             $response = array("message" => "No id is sent");
-            echo json_encode($response);
+        
         //Om id är skickad   
         } else {
             $data = json_decode(file_get_contents("php://input"));
@@ -92,7 +92,7 @@ switch($method) {
             || $data->website_img ==""
             || $data->website_about=="") {
                 $response = array("message"  => "Please enter the form." );
-                echo json_encode($response);
+                
                 http_response_code(400); //user error. Fel av användaren. 
             } else {
                 if($website->updateWebsite(
@@ -105,12 +105,12 @@ switch($method) {
                         // ok
                         http_response_code(200);
                         $response = array("message" => "website with id=$id is updated");
-                        echo json_encode($response);
+                        
                     } else {
                         // server error
                         http_response_code(503); 
                         $response=array("message" => "website not updated");
-                        echo json_encode($response);
+                     
                     }
             }
       }
@@ -119,19 +119,19 @@ switch($method) {
         if(!isset($id)) {
             http_response_code(400);
             $response = array("message" => "No id is sent");  
-            echo json_encode($response);
+            
             // om id skickas
         } else {
             // radera 
             if($website->deleteWebsite($id)) {
                 http_response_code(200);
                 $response = array("message" => "website with id=$id is deleted");
-                echo json_encode($response);
+                
             } else {
                 // server error
                 http_response_code(503); 
                 $response =array("message" =>"website not deleted.");
-                echo json_encode($response);
+               
             }
           
         }
