@@ -13,7 +13,8 @@ include_once("includes/config.php");
 // header('Access-Control-Allow-Origin: $http_origin');
 // } 
 
-//Gör att webbtjänsten går att komma åt från alla domäner (asterisk * betyder alla) 
+//Gör att webbtjänsten går att komma åt från alla domäner (asterisk * betyder alla)
+// uppladdad till filezilla med studenter.miun.se istället för *
 header('Access-Control-Allow-Origin: *');
 
 //Talar om att webbtjänsten skickar data i JSON-format
